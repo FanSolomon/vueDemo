@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数据与方法</title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		
+		<!-- 
+			引入vue.js时，会声明一个全局变量Vue
+			通过new Vue()可以获得一个应用对象，如下方的app
+			new Vue()时需要传递一个对象作为参数，该对象有两个属性：el（元素） data（保存数据）
+			在视图中声明的变量需要在data中注册这些变量，并且为变量进行初始化赋值
+		-->
+		<div id="app">
+		  {{ message }} {{name}}
+		</div>
+
+		<div id="test">
+			a:{{a}} <br>
+			<span v-once>这个a将不会改变: {{ a }}</span>
+		</div>
+
+		<div id="testFreeze">
+			{{channel}}
+			<!-- 点击之后这里的channel不会变化，因为Object.freeze(obj) -->
+			<button v-on:click="channel = 'b'">Change it</button>
+		</div>
+
+		<script type="text/javascript">
+
+		//**********************************************************************
+		var app = new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue!',
+				name : "Vue"
+			}
+		});
+
+		//**********************************************************************
+		var data = {a : 1};
+		var vm = new Vue({
+			el: '#test',
+			data: data
+		});
+
+		/**
+		 * vm.a和data.a都能够改变a的值
+		 * new Vue时需要提前声明所有要用的变量
+		 */
+		data.a = "xxx";
+		vm.a = "vm a";
+
+		console.log("data.a == vm.a:", data.a == vm.a)
+
+		//**********************************************************************
+		/**
+		 * Object.freeze();方法要在new Vue之前调用，不然没有效果
+		 * freeze会阻止修改现有的属性，也意味着响应系统无法再追踪变化
+		 */
+		var obj = {channel : "a"};
+		Object.freeze(obj);
+		var vm2 = new Vue({
+			el: '#testFreeze',
+			data: obj
+		});
+
+		// Vue 实例还暴露了一些有用的实例属性与方法。它们都有前缀 $，以便与用户定义的属性区分开来
+		console.log("vm2.$data === obj:", vm2.$data === obj);
+		console.log("vm2.$el === obj:", vm2.$el === document.getElementById('testFreeze'));
+
+		vm.$watch('a', function(newValue, oldValue) {
+			console.log(newValue, oldValue);
+		})
+
+		data.a = "xxx";
+
+		</script>
+	</body>
+</html>
