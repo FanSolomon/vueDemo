@@ -1,0 +1,93 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "index",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/index.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "LifecycleHooks",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/LifecycleHooks.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "insertValue",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/InsertValue.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Directives",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/Directives.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Class&StyleBindings",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/Class&StyleBindings.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "ConditionalRendering",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/ConditionalRendering.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "ListRendering",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/ListRendering.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "EventHandling",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/EventHandling.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "FormInputBindings",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/FormInputBindings.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "ComponentsBasics",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/ComponentsBasics.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "ComponentsRegistration",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/ComponentsRegistration.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "ToDoList",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/ToDoList.html"
+        }
+    ]
+}
