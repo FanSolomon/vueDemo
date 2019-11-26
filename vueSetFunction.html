@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue.set全局方法</title>
+<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="app">
+    <!-- 关于对对象的数据进行操作：
+        1.改变对象的引用
+        2.set方法 -->
+    <div v-for="(item, key, index) in userInfo">
+        {{ item }}---{{key}}---{{index}}
+    </div>
+
+    <!-- 关于对数组的数据进行操作：
+        1.变异方法
+        2.改变数组的引用
+        3.set方法 -->
+    <div v-for="(item, index) in arr">
+        {{ item }}------{{index}}
+    </div>
+</div>
+<script type="text/javascript">
+var vm = new Vue({
+	el : "#app",
+	data : {
+		userInfo: {
+            name: "Colin",
+            age: 28,
+            gender: "male"
+        },
+        arr: [1, 2, 3, 4]
+	},
+});
+setTimeout(function () {
+    vm.userInfo.phone = "123456";
+    console.log("vm.userInfo.phone = 123456 end!");
+
+    vm.arr[1] = 6;
+    console.log("vm.arr[1] = 6 end!");
+}, 2000);
+//全局方法
+setTimeout(function () {
+    Vue.set(vm.userInfo, "address", "Beijing");
+    console.log("Vue.set(vm.userInfo, address, Beijing) end!");
+
+    Vue.set(vm.arr, 2, 7);
+    console.log("Vue.set(vm.arr, 1, 6) end!");
+}, 4000);
+//实例方法
+setTimeout(function () {
+    vm.$set(vm.userInfo, "lastName", "Wang");
+    console.log("vm.$set(vm.userInfo, lastName, Wang) end!");
+
+    vm.$set(vm.arr, 2, 8);
+    console.log("vm.$set(vm.arr, 1, 7) end!");
+}, 6000);
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>

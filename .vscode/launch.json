@@ -88,6 +88,20 @@
             "name": "ToDoList",
             "sourceMaps": false,
             "file": "${workspaceRoot}/ToDoList.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "ComputedPropertiesAndWatchers",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/ComputedPropertiesAndWatchers.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "vueSetFunction",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/vueSetFunction.html"
         }
     ]
 }

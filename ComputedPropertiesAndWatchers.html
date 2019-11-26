@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>计算属性和侦听器</title>
+<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="app">
+    {{firstName + " " + lastName}}
+    {{fullNameCompute}}
+    {{age}}
+    {{fullNameMethod()}}
+    {{fullName}}
+</div>
+
+<div id="getterSetterTest">
+    {{fullName}}
+</div>
+
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#app",
+        data () {
+            return {
+                firstName: "Dell",
+                lastName: "Lee",
+                age: 20,
+                fullName:"Dell Lee"
+            }
+        },
+        //计算属性
+        //缓存机制：计算属性基于它们的响应式依赖进行缓存,只在相关响应式依赖发生改变时它们才会重新求值。
+        computed: {
+            fullNameCompute() {
+                console.log("Computed!");
+                return this.firstName + " " + this.lastName;
+            }
+        },
+        //方法虽然可以实现相同的功能 但由于没有缓存机制 不如计算属性
+        methods: {
+            fullNameMethod() {
+                console.log("Method Computed!");
+                return this.firstName + " " + this.lastName;
+            }
+        },
+        //侦听属性。当你有一些数据需要随着其它数据变动而变动时，你很容易滥用 watch——特别是如果你之前使用过 AngularJS。
+        //然而，通常更好的做法是使用计算属性而不是命令式的 watch 回调
+        watch: {
+            firstName: function (val) {
+                console.log("Watch Computed!");
+                this.fullName = val + ' ' + this.lastName
+            },
+            lastName: function (val) {
+                console.log("Watch Computed!");
+                this.fullName = this.firstName + ' ' + val
+            }
+        }
+    });
+    setTimeout(function () {
+        vm.age = 18;
+    },2000)
+    setTimeout(function () {
+        vm.firstName = "Colin";
+    },4000)
+
+
+    //**********************************************************************
+    //计算属性的getter与setter
+    var vm2 = new Vue({
+        el: "#getterSetterTest",
+        data () {
+            return {
+                firstName: "Dell",
+                lastName: "Lee",
+            }
+        },
+        computed: {
+            fullName: {
+                get: function () {
+                    return this.firstName + " " + this.lastName;
+                },
+                set: function (value) {
+                    console.log("setter前的" + this.fullName);
+                    console.log("setter中的value：" + value);
+                    var arr = value.split(" ");
+                    this.firstName = arr[0];
+                    this.lastName = arr[1];
+                    console.log("setter后的" + this.fullName);
+                }
+            }
+        },
+    });
+    setTimeout(function () {
+        vm2.fullName = "Colin Liu";
+    },4000)
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>

@@ -2,13 +2,14 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title></title>
+<title>样式绑定</title>
 <script src="vue.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 <div id="app">
 	<div 
 	class="test" 
+	@click="handleClick"
 	v-bind:class="[ isActive ? 'active' : '', isGreen ? 'green' : '']" 
 	style="width:200px; height:200px; text-align:center; line-height:200px;">
 		hi vue
@@ -16,6 +17,10 @@
 	
 	<div 
 	:style="{color:color, fontSize:size, background: isRed ? '#FF0000' : ''}">
+		hi vue
+	</div>
+
+	<div :style="[styleObj, {fontSize: '20px'}]" @click="handleClick">
 		hi vue
 	</div>
 </div>
@@ -27,14 +32,24 @@ var vm = new Vue({
 		isGreen : true,
 		color : "#FFFFFF",
 		size : '50px',
-		isRed : true
-	}
+		isRed : true,
+		styleObj: {
+			color: "black"
+		}
+	},
+	methods: {
+		handleClick() {
+			this.isActive = !this.isActive;
+			this.isGreen = !this.isGreen;
+			this.styleObj.color = this.styleObj.color === "black" ? "#42b983" : "black";
+		}
+	},
 });
 </script>
 <style>
 .test{font-size:30px;}
-.green{color:#00FF00;}
-.active{background:#FF0000;}
+.green{color:#42b983;}
+.active{background:rgb(164, 11, 235);}
 </style>
 </body>
 </html>

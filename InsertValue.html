@@ -22,6 +22,14 @@
 	<p>{{ message.split('').reverse().join('') }}</p>
 	<p v-if="seen"> 是否显示 </p>
 </div>
+
+<!-- v-text也是一种模板语法 v-text会做转义  v-html则不会 -->
+<div id="test">
+	<div>{{name + ' Lee'}}</div>
+	<div v-text="name + ' Lee'"></div>
+	<div v-html="name + ' Lee'"></div>
+</div>
+
 <script type="text/javascript">
 var vm = new Vue({
 	el : "#app",
@@ -36,6 +44,14 @@ var vm = new Vue({
 	}
 });
 vm.msg = "hi....";
+
+new Vue({
+	el: "#test",
+	data: {
+		name: "<h1>XXX</h1>"
+	}
+})
+
 </script>
 <style type="text/css">
 .red{color:red;}
