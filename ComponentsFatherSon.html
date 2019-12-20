@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>父子组件传值</title>
+<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 父组件向子组件传值 -->
+        <counter content="hello" :count="3" @change="handleChange"></counter>
+        <counter content="world" :count="1" @change="handleChange"></counter>
+        <div>{{total}}</div>
+
+        <!-- 组件参数校验 -->
+        <child content="12322e">{{content}}</child>
+
+        <!-- 给组件绑定原生事件 上面例子中change为自定义事件 这里click可以是原生事件 -->
+        <child2 @click.native="handleChildClick"></child2>
+    </div>
+    
+    <script type="text/javascript">
+
+        /* 单向数据流 父组件可以向子组件传值 但子组件不能修改父组件传过来的值 */
+        //声明局部组件
+        var counter = {
+            props: ['count'],
+            data() {
+                return {
+                    number: this.count
+                }
+            },
+            template: '<div @click="handleClick">{{number}}</div>',
+            methods: {
+                handleClick() {
+                    //由于单向数据流 不能使用this.count ++
+                    this.number += 2;
+                    this.$emit('change', 2)
+                }
+            },
+        };
+
+        Vue.component('child', {
+            props: {
+                //子组件接收的content属性 类型是String或Number
+                // content : [ String, Number ]
+                content : {
+                    type: String,
+                    // required: false,
+                    // default: 'default value',
+                    validator(value) {
+                        return(value.length > 5)
+                    }
+                }
+            },
+            template:'<div>{{content}}</div>'
+        })
+
+        Vue.component('child2', {
+            template: '<div>Chile2</div>'
+        })
+
+        var vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    total: 0
+                }
+            },
+            components: {
+                counter : counter
+            },
+            methods: {
+                handleChange(step) {
+                    this.total += step;
+                },
+                handleChildClick() {
+                    console.log('child2 has been clicked!')
+                }
+            },
+        })
+    </script>
+</body>
+</html>

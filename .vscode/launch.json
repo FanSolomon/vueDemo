@@ -102,6 +102,20 @@
             "name": "vueSetFunction",
             "sourceMaps": false,
             "file": "${workspaceRoot}/vueSetFunction.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "ComponentsDetail",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/ComponentsDetail.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "ComponentsFatherSon",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/ComponentsFatherSon.html"
         }
     ]
 }
