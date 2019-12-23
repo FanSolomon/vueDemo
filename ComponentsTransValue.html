@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>非父子组件间传值（Bus/总线/发布订阅模式/观察者模式）</title>
+<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="root">
+    <child content="Dell"></child>
+    <child content="Lee"></child>
+</div>
+<script type="text/javascript">
+
+    //使得每个实例上都有bus属性
+    Vue.prototype.bus = new Vue()
+
+    Vue.component('child', {
+        props: {
+            content: String
+        },
+        data() {
+            return {
+                message: this.content
+            }
+        },
+        template: '<div @click="handleClick">{{message}}</div>',
+        methods: {
+            handleClick() {
+                this.bus.$emit('change', this.message)
+            }
+        },
+        //生命周期钩子
+        mounted() {
+
+            var this_ = this;
+
+            this.bus.$on('change', function (msg) { 
+                this_.message = msg;
+             })
+        },
+    })
+
+    var vm = new Vue({
+        el : "#root",
+    });
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>

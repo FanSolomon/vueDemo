@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue中的插槽（slot）</title>
+<!-- 通过插槽可以向子组件传递dom元素 -->
+<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="root">
+    <child>
+        <h1>DELL</h1>
+    </child>
+
+    <body-content>
+        <div class="header" slot="header">header</div>
+        <div class="footer" slot="footer">footer</div>
+    </body-content>
+
+    <child2>
+        <!-- template为固定写法 slot-scope用来接收item参数 -->
+        <template slot-scope="xxx">
+            <li>{{xxx.item}}</li>
+        </template>
+    </child2>
+</div>
+<script type="text/javascript">
+
+    Vue.component('child', {
+        template: `<div>
+                        <p>hello</p>
+                        <slot>默认内容</slot>
+                   </div>`,
+    })
+
+    //具名插槽
+    Vue.component('body-content', {
+        template:`<div>
+                    <slot name="header">default header</slot>
+                    <div class="content">content</div>
+                    <slot name="footer"></slot>
+                </div>`
+    })
+
+    //作用域插槽
+    Vue.component('child2', {
+        data() {
+            return {
+                list:[1, 2, 3, 4]
+            }
+        },
+        template:`<div>
+                    <ul>
+                        <slot v-for="item of list" :item=item></slot>
+                    </ul>
+                  </div>`
+    })
+
+    var vm = new Vue({
+        el : "#root",
+    });
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>

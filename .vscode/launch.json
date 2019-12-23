@@ -116,6 +116,20 @@
             "name": "ComponentsFatherSon",
             "sourceMaps": false,
             "file": "${workspaceRoot}/ComponentsFatherSon.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "ComponentsTransValue",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/ComponentsTransValue.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Slot",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/Slot.html"
         }
     ]
 }
