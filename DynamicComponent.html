@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>动态组件与v-once指令</title>
+<!-- 通过插槽可以向子组件传递dom元素 -->
+<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="root">
+    <!-- 动态组件方式 -->
+    <component :is="type"></component>
+    <!-- <child-one v-if="type === 'child-one'"></child-one>
+    <child-two v-if="type === 'child-two'"></child-two> -->
+    <button @click="handleBtnClick">button</button>
+</div>
+<script type="text/javascript">
+
+    Vue.component('child-one', {
+        // 运用v-once指令 避免组件被反复创建和销毁 会将创建组件保存在内存中
+        template: `<div v-once>child-one</div>`,
+    })
+
+    Vue.component('child-two', {
+        template: `<div v-once>child-two</div>`,
+    })
+
+    var vm = new Vue({
+        el : "#root",
+        data() {
+            return {
+                type: 'child-one'
+            }
+        },
+        methods: {
+            handleBtnClick() {
+                this.type = this.type === 'child-one' ? 'child-two' : 'child-one';
+            }
+        },
+    });
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>

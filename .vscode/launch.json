@@ -130,6 +130,13 @@
             "name": "Slot",
             "sourceMaps": false,
             "file": "${workspaceRoot}/Slot.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "DynamicComponent",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/DynamicComponent.html"
         }
     ]
 }
