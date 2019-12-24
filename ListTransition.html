@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue中的列表过渡</title>
+<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="velocity.min.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="./animate.css">
+</head>
+<body>
+<div id="root">
+    <transition-group name="fade">
+        <div v-for="item in list" :key="item.id">{{item.title}}</div>
+    </transition-group>
+    <button @click="handleBtnClick">Add</button>
+</div>
+<script type="text/javascript">
+
+    var count = 0;
+
+    var vm = new Vue({
+        el : "#root",
+        data() {
+            return {
+                list: []
+            }
+        },
+        methods: {
+            handleBtnClick() {
+                this.list.push({
+                    id: count++,
+                    title: 'hello world'
+                })
+            }
+        },
+    });
+</script>
+<style type="text/css">
+    .fade-enter, .fade-leave-to {
+        opacity: 0;
+    }
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity 1s;
+    }
+</style>
+</body>
+</html>

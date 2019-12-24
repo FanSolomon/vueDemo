@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue中CSS动画原理</title>
+<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="./animate.css">
+</head>
+<body>
+<div id="root">
+
+    <!-- 在需要动画的元素外加transition -->
+    <transition name="fade">
+        <div v-if="show">Hello World</div>
+    </transition>
+
+    <!-- 在vue中使用animate.css -->
+    <!-- type="transition"设置总时长根据transition的时间
+         :duration="10000"设置总时长 -->
+    <transition
+        :duration="{enter: 5000, leave:10000}"
+        name="fade"
+        appear
+        enter-active-class="animated jello fade-enter-active"
+        leave-active-class="animated pulse fade-leave-active"
+        appear-active-class="animated jello">
+        <div v-if="show">Hello World</div>
+    </transition>
+    
+    <button @click="handleClick">button</button>
+</div>
+<script type="text/javascript">
+
+    var vm = new Vue({
+        el : "#root",
+        data() {
+            return {
+                show: true
+            }
+        },
+        methods: {
+            handleClick() {
+                this.show = !this.show;
+            }
+        },
+    });
+</script>
+<style type="text/css">
+    /* 前缀是fade是因为transition的name为fade VUE默认是v 如v-enter */
+    .fade-enter, .fade-leave-to {
+        opacity: 0;
+    }
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity 3s;
+    }
+</style>
+</body>
+</html>

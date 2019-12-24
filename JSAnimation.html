@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue中CSS动画原理</title>
+<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="velocity.min.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="./animate.css">
+</head>
+<body>
+<div id="root">
+
+    <transition
+        name="fade"
+        @before-enter="handleBeforeEnter"
+        @enter="handleEnter"
+        @after-enter="handleAfterEnter"
+    >
+        <div v-if="show">Hello World</div>
+    </transition>
+    
+    <button @click="handleClick">button</button>
+</div>
+<script type="text/javascript">
+
+    var vm = new Vue({
+        el : "#root",
+        data() {
+            return {
+                show: true
+            }
+        },
+        methods: {
+            handleClick() {
+                this.show = !this.show;
+            },
+            handleBeforeEnter(el) {
+                // el.style.color = "red"
+                el.style.opacity = 0;
+            },
+            handleEnter(el, down) {
+                // setTimeout(() => {
+                //     el.style.color = 'green'
+                // }, 2000);
+
+                // setTimeout(() => {
+                //     down();
+                // }, 4000);
+
+                Velocity(el, {opacity: 1}, {duration: 2000, complete: down})
+            },
+            handleAfterEnter(el) {
+                // el.style.color = "#000"
+                console.log("动画结束")
+            }
+        },
+    });
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>

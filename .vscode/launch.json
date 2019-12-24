@@ -137,6 +137,41 @@
             "name": "DynamicComponent",
             "sourceMaps": false,
             "file": "${workspaceRoot}/DynamicComponent.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Animation",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/Animation.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "JSAnimation",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/JSAnimation.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "ComponentsTransition",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/ComponentsTransition.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "ListTransition",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/ListTransition.html"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "AnimationEncapsulation",
+            "sourceMaps": false,
+            "file": "${workspaceRoot}/AnimationEncapsulation.html"
         }
     ]
 }

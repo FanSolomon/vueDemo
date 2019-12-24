@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue中的动画封装</title>
+<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+<script src="velocity.min.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="./animate.css">
+</head>
+<body>
+<div id="root">
+    <fade :show="show"><div>hello world</div></fade>
+    <fade :show="show"><h1>hello world</h1></fade>
+    <button @click="handleClick">button</button>
+</div>
+<script type="text/javascript">
+
+    Vue.component('fade', {
+        props: ['show'],
+        template: `<transition
+        name="fade"
+        @before-enter="handleBeforeEnter"
+        @enter="handleEnter"
+        @after-enter="handleAfterEnter"
+        >
+        <slot v-if="show"></slot>
+        </transition>`,
+        methods: {
+            handleBeforeEnter(el) {
+                // el.style.color = "red"
+                el.style.opacity = 0;
+            },
+            handleEnter(el, down) {
+                // setTimeout(() => {
+                //     el.style.color = 'green'
+                // }, 2000);
+
+                // setTimeout(() => {
+                //     down();
+                // }, 4000);
+
+                Velocity(el, {opacity: 1}, {duration: 2000, complete: down})
+            },
+            handleAfterEnter(el) {
+                // el.style.color = "#000"
+                console.log("动画结束")
+            }
+        }
+    })
+
+    var vm = new Vue({
+        el : "#root",
+        data() {
+            return {
+                show: true
+            }
+        },
+        methods: {
+            handleClick() {
+                this.show = !this.show;
+            },
+            
+        },
+    });
+</script>
+<style type="text/css">
+
+</style>
+</body>
+</html>
